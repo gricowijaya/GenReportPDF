@@ -7,7 +7,7 @@ package laporan_stok;
 
 /**
  *
- * @author ASUS
+ * @author Monica Arysta - 2005551090
  */
 public class welcome extends javax.swing.JFrame {
 
