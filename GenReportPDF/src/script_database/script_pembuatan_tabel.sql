@@ -1,3 +1,4 @@
+
 CREATE TABLE tb_barang ( 
     id_barang INT PRIMARY KEY NOT NULL, 
     in_stok INT DEFAULT 0, 
