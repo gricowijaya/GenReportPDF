@@ -1,18 +1,8 @@
 package user_interface;
 
-import java.awt.Color;
-import javax.swing.JOptionPane;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.swing.JFrame;
-import javax.swing.BorderFactory;
-import javax.swing.border.Border;
-
 /**
  *
- * Luh Putu Monica Arysta Putri Suastawan - 2005551090 Gede Rico Wijaya
- * -2005551091
+ * @author Monica Arysta - 2005551090
  *
  */
 public class MenuLogin extends javax.swing.JFrame {
@@ -47,6 +37,7 @@ public class MenuLogin extends javax.swing.JFrame {
         ShowPassword.setBackground(new java.awt.Color(214, 236, 243));
         ShowPassword.setForeground(new java.awt.Color(214, 236, 243));
         ShowPassword.setBorder(null);
+        ShowPassword.setOpaque(false);
         ShowPassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ShowPasswordActionPerformed(evt);
@@ -57,6 +48,7 @@ public class MenuLogin extends javax.swing.JFrame {
 
         NamaPengguna.setBorder(null);
         NamaPengguna.setCaretColor(new java.awt.Color(255, 255, 255));
+        NamaPengguna.setOpaque(false);
         getContentPane().add(NamaPengguna);
         NamaPengguna.setBounds(590, 330, 380, 30);
 
@@ -66,7 +58,7 @@ public class MenuLogin extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Password);
-        Password.setBounds(590, 400, 380, 40);
+        Password.setBounds(590, 410, 380, 26);
         getContentPane().add(LupaKataSandi);
         LupaKataSandi.setBounds(810, 450, 180, 30);
 
@@ -86,39 +78,50 @@ public class MenuLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * Method ini merupakan method yang digunakan untuk Button yang memperlihatkan
-     * password saat user mengetik password Pemrogram : Luh Putu Monica Arysta Putri
-     * Suastawan - 2005551090 Pemrogram : Gede Rico Wijaya - 2005551091
-     */
     private void ShowPasswordActionPerformed(java.awt.event.ActionEvent evt) {
-        ShowPassword.setVisible(true);
     }
 
-    /**
-     * Method ini merupakan method yang digunakan untuk Icon Show Password yang
-     * dimana digunakan untuk mengubah warna atau opaque ketik Icon ditunjuk oleh
-     *
-     * cursor pada mouse Pemrogram Gede Rico Wijaya - 2005551091
-     */
-    private void ShowPasswordMouseEntered(java.awt.event.MouseEvent evt) {
-        ShowPassword.setOpaque(true);
-        ShowPassword.setBackground(Color.RED);
-    }
-
-    /**
-     * 
-     * Method ini merupakan method yang digunakan dalam mengetik password pada label
-     * password sehingga pengguna dapat masuk kedalam program yang ingin dijalankan
-     * Pemrogram : Gede Rico Wijaya 2005551091
-     */
     private void PasswordActionPerformed(java.awt.event.ActionEvent evt) {
         if (ShowPassword.isSelected()) {
             Password.setEchoChar((char) 0);
         } else {
             Password.setEchoChar('*');
         }
-        System.out.print(evt);
+    }
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
+        // (optional) ">
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the default
+         * look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(MenuLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(MenuLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(MenuLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MenuLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        // </editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuLogin().setVisible(true);
+            }
+        });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
