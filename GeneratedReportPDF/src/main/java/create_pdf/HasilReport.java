@@ -12,70 +12,76 @@ package create_pdf;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-
+import java.io.File;
+import java.time.*;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
+import connect_to_database.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class HasilReport {
-    public static void generate_report() {
-        // String untuk file dari nama 
-        String nama_file = "Laporan Stok.pdf"; 
-        Document document = new Document();
-        try {
-          
-            document.open();
-     
-            /* Membuat tabel dengan 4 kolom untuk generasi pdf Report
-             *
-             * Pada Tabel ini lebar dari setiap tabel dilakukan generasi 4 kolom 
-             * lalu lebar dari setiap tabel tersebut adalah 100 %
-             * dan di set Spacing Before dan Afternya 
-             */
 
-            // Pdf Table (4) dengan 4 kolom 
-            PdfPTable table = new PdfPTable(4); 
-            table.setWidthPercentage(100); 
-            table.setSpacingBefore(10f); 
-            table.setSpacingAfter(10f); 
-     
-            //Set Column widths
-            float[] columnWidths = {1f, 1f, 1f};
-            table.setWidths(columnWidths);
-     
-            PdfPCell cell1 = new PdfPCell(new Paragraph(nama_file;Cell 1nama_file;));
-            cell1.setBorderColor(BaseColor.BLACK);
-            cell1.setPaddingLeft(10);
-            cell1.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell1.setVerticalAlignment(Element.ALIGN_MIDDLE);
-     
-            PdfPCell cell2 = new PdfPCell(new Paragraph(&quot;Cell 2&quot;));
-            cell2.setBorderColor(BaseColor.BLACK);
-            cell2.setPaddingLeft(10);
-            cell2.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell2.setVerticalAlignment(Element.ALIGN_MIDDLE);
-     
-            PdfPCell cell3 = new PdfPCell(new Paragraph(&quot;Cell 3&quot;));
-            cell3.setBorderColor(BaseColor.BLACK);
-            cell3.setPaddingLeft(10);
-            cell3.setHorizontalAlignment(Element.ALIGN_CENTER);
-            cell3.setVerticalAlignment(Element.ALIGN_MIDDLE);
-     
-            //To avoid having the cell border and the content overlap, if you are having thick cell borders
-            //cell1.setUserBorderPadding(true);
-            //cell2.setUserBorderPadding(true);
-            //cell3.setUserBorderPadding(true);
-     
-            table.addCell(cell1);
-            table.addCell(cell2);
-            table.addCell(cell3);
-     
-            document.add(table);
-     
+    public static void generate_report() {
+        // String untuk file dari nama
+        try {
+            // String untuk nama dari file, bisa digunakan dengan directory tetapi
+            // karena keterbatasan sistem maka hanya diperlukan nama dari Judul pdf saja
+            String nama_file = "HasilReport.pdf";
+            Document document = new Document();
+            PdfWriter.getInstance(document, new FileOutputStream(new File(nama_file)));
+            document.open();
+
+            // menambahkan koneksi pada database
+            KoneksiDatabase koneksi = new KoneksiDatabase();
+            Connection database_koneksi = koneksi.getConnection();
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            // Query yang digunakan untuk mengambil data dari database db_stok_barang
+            String query_Pengambilan_data = "SELECT nama_barang, stok_awal, in_stok, out_stok, sisa_stok, kode_kategori FROM tb_barang";
+            ps = database_koneksi.prepareStatement(query_Pengambilan_data);
+            rs = ps.executeQuery();
+            // Menambahkan paragraf yang berupa sebuah hasil rekap dari store dengan detail
+            // waktu pencatatan tersebut
+            String judul = new String("Hasil Rekap Store Tanggal" + LocalDateTime.now().toString());
+            document.addTitle(judul);
+
+            // membuat tabel yang digunakan untuk menyimpan data
+            // tabel ini dibuat dengan 6 kolom yang menyimpan nama_barang, stok_awal,
+            // in_stok, out_stok, sisa_stok
+            PdfPTable tabel_penyimpanan_data = new PdfPTable(6);
+            PdfPCell kolom = new PdfPCell(new Phrase("Nama Barang"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            kolom = new PdfPCell(new Phrase("Stok Awal"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            kolom = new PdfPCell(new Phrase("Stok IN"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            kolom = new PdfPCell(new Phrase("Stok OUT"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            kolom = new PdfPCell(new Phrase("Stok Akhir"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            kolom = new PdfPCell(new Phrase("Kategori"));
+            tabel_penyimpanan_data.addCell(kolom);
+
+            document.add(kolom);
             document.close();
-            writer.close();
-        } catch (FileNotFoundException e) {
+
+            // jika dokumen HasilReport.pdf sudah tercipta maka pada command line akan
+            // terdapat pesan "Document Tercipta"
+            System.out.print("Document Tercipta");
+        } catch (Exception e) {
             System.err.println(e);
         }
     }
