@@ -27,7 +27,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class HasilReport {
-
     public static void generate_report() {
         // String untuk file dari nama
         try {
@@ -53,6 +52,10 @@ public class HasilReport {
             String judul = new String("Hasil Rekap Store Tanggal" + LocalDateTime.now().toString());
             document.addTitle(judul);
 
+            while(rs.next()) { 
+
+            }
+    
             // membuat tabel yang digunakan untuk menyimpan data
             // tabel ini dibuat dengan 6 kolom yang menyimpan nama_barang, stok_awal,
             // in_stok, out_stok, sisa_stok
@@ -74,7 +77,6 @@ public class HasilReport {
 
             kolom = new PdfPCell(new Phrase("Kategori"));
             tabel_penyimpanan_data.addCell(kolom);
-
             document.add(kolom);
             document.close();
 

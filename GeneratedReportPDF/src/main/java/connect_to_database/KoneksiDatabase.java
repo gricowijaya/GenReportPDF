@@ -17,7 +17,7 @@ public class KoneksiDatabase {
     // membar password digunakan untuk menyimpan password dari server
     private static String server = "localhost";
     private static String username = "root";
-    private static String database = "login_register_db";
+    private static String database = "db_stok_barang";
     private static Integer port = 3306;
     private static String password = "";
 
@@ -34,7 +34,7 @@ public class KoneksiDatabase {
         datasource.setPassword(password);
         datasource.setDatabaseName(database);
         datasource.setPortNumber(port);
-
+        
         try {
             // menghubungkan koneksi dengan database
             cnx = datasource.getConnection();
