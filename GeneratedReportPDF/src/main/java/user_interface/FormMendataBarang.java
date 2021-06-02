@@ -12,7 +12,7 @@ package user_interface;
 public class FormMendataBarang extends javax.swing.JFrame {
 
     /**
-     * Creates new form login
+     * Creates new form FormMendataBarang
      */
     public FormMendataBarang() {
         initComponents();
@@ -27,73 +27,56 @@ public class FormMendataBarang extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        InputNamaBarang = new javax.swing.JTextField();
-        TambahBarang = new javax.swing.JButton();
-        Kembali = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        InputKategori = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        NamaBarang_Field = new javax.swing.JTextField();
+        Kategori_ComboBox = new javax.swing.JComboBox<>();
+        SatuanBarang_Field = new javax.swing.JTextField();
+        TambahBarang_Label = new javax.swing.JLabel();
+        Kembali_Label = new javax.swing.JLabel();
+        Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        InputNamaBarang.setBorder(null);
-        InputNamaBarang.setCaretColor(new java.awt.Color(255, 255, 255));
-        InputNamaBarang.setOpaque(false);
-        InputNamaBarang.addActionListener(new java.awt.event.ActionListener() {
+        jPanel2.setLayout(null);
+
+        NamaBarang_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        NamaBarang_Field.setBorder(null);
+        jPanel2.add(NamaBarang_Field);
+        NamaBarang_Field.setBounds(340, 250, 650, 50);
+
+        Kategori_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pcs", "pack", "gram", "lusin", "rim", "pasang", " ", " " }));
+        Kategori_ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                InputNamaBarangActionPerformed(evt);
+                Kategori_ComboBoxActionPerformed(evt);
             }
         });
-        getContentPane().add(InputNamaBarang);
-        InputNamaBarang.setBounds(340, 240, 660, 70);
+        jPanel2.add(Kategori_ComboBox);
+        Kategori_ComboBox.setBounds(340, 350, 660, 60);
 
-        TambahBarang.setBackground(new java.awt.Color(255, 255, 255));
-        TambahBarang.setForeground(new java.awt.Color(255, 255, 255));
-        TambahBarang.setBorder(null);
-        TambahBarang.setOpaque(false);
-        TambahBarang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TambahBarangActionPerformed(evt);
-            }
-        });
-        getContentPane().add(TambahBarang);
-        TambahBarang.setBounds(520, 540, 230, 80);
+        SatuanBarang_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        SatuanBarang_Field.setBorder(null);
+        jPanel2.add(SatuanBarang_Field);
+        SatuanBarang_Field.setBounds(340, 460, 660, 50);
+        jPanel2.add(TambahBarang_Label);
+        TambahBarang_Label.setBounds(520, 550, 230, 70);
+        jPanel2.add(Kembali_Label);
+        Kembali_Label.setBounds(21, 590, 70, 50);
 
-        Kembali.setBorder(null);
-        getContentPane().add(Kembali);
-        Kembali.setBounds(23, 580, 70, 50);
+        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Form Mendata Barang.png"))); // NOI18N
+        jPanel2.add(Background);
+        Background.setBounds(0, 0, 1060, 650);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(340, 440, 660, 70);
-        getContentPane().add(InputKategori);
-        InputKategori.setBounds(340, 340, 660, 70);
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(0, 0, 1059, 650);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Form Mendata Barang.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        getContentPane().add(jLabel2);
-        jLabel2.setBounds(0, 0, 1080, 640);
-
-        pack();
+        setSize(new java.awt.Dimension(1081, 705));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void Kategori_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kategori_ComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
-
-    private void InputNamaBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InputNamaBarangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InputNamaBarangActionPerformed
-
-    private void TambahBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TambahBarangActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TambahBarangActionPerformed
+    }//GEN-LAST:event_Kategori_ComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +104,6 @@ public class FormMendataBarang extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(FormMendataBarang.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -132,11 +114,12 @@ public class FormMendataBarang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField InputKategori;
-    private javax.swing.JTextField InputNamaBarang;
-    private javax.swing.JButton Kembali;
-    private javax.swing.JButton TambahBarang;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel Background;
+    private javax.swing.JComboBox<String> Kategori_ComboBox;
+    private javax.swing.JLabel Kembali_Label;
+    private javax.swing.JTextField NamaBarang_Field;
+    private javax.swing.JTextField SatuanBarang_Field;
+    private javax.swing.JLabel TambahBarang_Label;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
