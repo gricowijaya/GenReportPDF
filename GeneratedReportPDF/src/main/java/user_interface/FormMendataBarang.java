@@ -5,10 +5,25 @@
  */
 package user_interface;
 
+import connect_to_database.KoneksiDatabase;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
+
 /**
  *
- * @author ASUS
+ * @author Luh Putu Monica Arysta Putri Suastawan - 2005551090  
+ * @author Gede Rico Wijaya - 2005551091
  */
+
 public class FormMendataBarang extends javax.swing.JFrame {
 
     /**
@@ -58,6 +73,12 @@ public class FormMendataBarang extends javax.swing.JFrame {
         SatuanBarang_Field.setBorder(null);
         jPanel2.add(SatuanBarang_Field);
         SatuanBarang_Field.setBounds(340, 460, 660, 50);
+
+        TambahBarang_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TambahBarang_LabelMouseClicked(evt);
+            }
+        });
         jPanel2.add(TambahBarang_Label);
         TambahBarang_Label.setBounds(520, 550, 230, 70);
         jPanel2.add(Kembali_Label);
@@ -75,9 +96,94 @@ public class FormMendataBarang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Kategori_ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Kategori_ComboBoxActionPerformed
-        // TODO add your handling code here:
+        PreparedStatement ps;
+        ResultSet rs; 
+
     }//GEN-LAST:event_Kategori_ComboBoxActionPerformed
 
+    private void TambahBarang_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TambahBarang_LabelMouseClicked
+        // variabel untuk mengekseksusi query
+        PreparedStatement ps;
+        // sebuah cursor untuk baris dari tabel tersebut
+        ResultSet rs;
+
+        String Nama_Barang = NamaBarang_Field.getText();
+
+        // Query memasukkan nama_barang
+        if (cekTextField()) {
+            // melakukan pengecekan nama_barang ada atau tidak 
+            if (!CekBarang(Nama_Barang)) {
+                // menyimpan query yang digunakan pada SQL
+                String queryMendataBarang = "INSERT INTO tb_barang(nama_barang) VALUES (?)";
+                try {
+                    // mencoba eksekusi query
+                    ps = KoneksiDatabase.getConnection().prepareStatement(queryMendataBarang);
+                    // pengganti Value harus sesuai order pada tabel yang digunakan untuk query
+                    ps.setString(1, Nama_Barang);
+                    // Setelah menjalankan query INSERT terhadap barang
+                    try {
+                        if (ps.executeUpdate() != 0) {
+                            JOptionPane.showMessageDialog(null, "Barang Terdaftarkan Pada Sistem ! ");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error, Barang Tidak Terdaftar, Silahkan Cek Data");
+                        }
+                        // jika tidak akan mendapatkan error dari dialog dan exeception handler
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                    }
+                    // jika query tidak terjalankan akan diberikan SQLExeption pada terminal
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_TambahBarang_LabelMouseClicked
+
+    /** Method untuk mengecek ketersediaan Nama Barang 
+     *  yang digunakan dengan melakukan query terhadap database 
+     *  nantinya pengecekan ini akan dikembalikan terhadap method klik
+     *
+     *  2005551091 - Gede Rico Wijaya*/
+     public boolean CekBarang(String Nama_Barang) {
+        PreparedStatement st;
+        ResultSet rs;
+
+        boolean Nama_Barang_terdaftar = false;
+
+        // query yang akan dijalankan pada database
+        String query = "SELECT * FROM tb_barang WHERE nama_barang = ?";
+
+        // pengecekan Nama_Barang
+        try {
+            st = KoneksiDatabase.getConnection().prepareStatement(query);
+            st.setString(1, Nama_Barang);
+            rs = st.executeQuery();
+
+            if (rs.next()) {
+                Nama_Barang_terdaftar = true;
+                JOptionPane.showMessageDialog(null, "Nama_Barang Sudah Terdaftar, Silahkan Pilih Username lain !",
+                        "Gagal terdaftar", 2);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return Nama_Barang_terdaftar;
+    }
+
+
+    /** Method untuk mengecek kekosongan text Field */
+    public boolean cekTextField() {
+        String NamaBarang  = NamaBarang_Field.getText();
+
+        // mengecek field yang kosong
+        if (NamaBarang.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Salah satu kotak tidak diisi data", "kotak Kosong", 2);
+            return false;
+        // jika field tidak kosong
+        } else {
+            return true;
+        }
+    }
     /**
      * @param args the command line arguments
      */
