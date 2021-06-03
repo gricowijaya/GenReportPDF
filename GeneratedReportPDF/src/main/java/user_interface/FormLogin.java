@@ -91,6 +91,11 @@ public class FormLogin extends javax.swing.JFrame {
         KataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
         KataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
         KataSandi_Field.setBorder(null);
+        KataSandi_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KataSandi_FieldActionPerformed(evt);
+            }
+        });
         jPanel1.add(KataSandi_Field);
         KataSandi_Field.setBounds(590, 410, 380, 30);
 
@@ -151,8 +156,8 @@ public class FormLogin extends javax.swing.JFrame {
                 rs = st.executeQuery();
                 // jika sudah terdaftar maka ResultSet akan berlanjut ke baris selanjutnya
                 if (rs.next()) {
-                    FormMendataBarang form = new FormMendataBarang();
-                    form.show();
+                    MenuBeranda beranda = new MenuBeranda();
+                    beranda.show();
                     JOptionPane.showMessageDialog(null, "Berhasil Login");
                     this.dispose();
                 } else {
@@ -175,42 +180,11 @@ public class FormLogin extends javax.swing.JFrame {
         } 
     }//GEN-LAST:event_LihatPassword_LabelMouseClicked
 
-   
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FormLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void KataSandi_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KataSandi_FieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KataSandi_FieldActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                FormLogin login = new FormLogin();
-                new FormLogin().setVisible(true);
-                login.pack();
-                login.setSize(1153, 695);
-                login.setLocationRelativeTo(null);
-            }
-        });
-    }
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JLabel Daftar_Label;

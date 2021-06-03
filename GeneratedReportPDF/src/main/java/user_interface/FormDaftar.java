@@ -39,12 +39,12 @@ public class FormDaftar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        KataSandi_Field = new javax.swing.JPasswordField();
-        KonfirmasiKataSandi_Field = new javax.swing.JPasswordField();
         Email_TextField = new javax.swing.JTextField();
         NamaPengguna_TextField = new javax.swing.JTextField();
         Masuk_Label = new javax.swing.JLabel();
         Daftar_Label = new javax.swing.JLabel();
+        KataSandi_Field = new javax.swing.JPasswordField();
+        KonfirmasiKataSandi_Field = new javax.swing.JPasswordField();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,25 +52,6 @@ public class FormDaftar extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(214, 236, 243));
         jPanel2.setLayout(null);
-
-        KataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
-        KataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
-        KataSandi_Field.setForeground(new java.awt.Color(214, 236, 243));
-        KataSandi_Field.setBorder(null);
-        KataSandi_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KataSandi_FieldActionPerformed(evt);
-            }
-        });
-        jPanel2.add(KataSandi_Field);
-        KataSandi_Field.setBounds(720, 350, 320, 20);
-
-        KonfirmasiKataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
-        KonfirmasiKataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
-        KonfirmasiKataSandi_Field.setForeground(new java.awt.Color(214, 236, 243));
-        KonfirmasiKataSandi_Field.setBorder(null);
-        jPanel2.add(KonfirmasiKataSandi_Field);
-        KonfirmasiKataSandi_Field.setBounds(720, 410, 320, 20);
 
         Email_TextField.setBackground(new java.awt.Color(214, 236, 243));
         Email_TextField.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
@@ -112,6 +93,23 @@ public class FormDaftar extends javax.swing.JFrame {
         });
         jPanel2.add(Daftar_Label);
         Daftar_Label.setBounds(730, 490, 220, 50);
+
+        KataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
+        KataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        KataSandi_Field.setBorder(null);
+        KataSandi_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                KataSandi_FieldActionPerformed(evt);
+            }
+        });
+        jPanel2.add(KataSandi_Field);
+        KataSandi_Field.setBounds(720, 350, 320, 20);
+
+        KonfirmasiKataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
+        KonfirmasiKataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        KonfirmasiKataSandi_Field.setBorder(null);
+        jPanel2.add(KonfirmasiKataSandi_Field);
+        KonfirmasiKataSandi_Field.setBounds(720, 410, 320, 20);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Daftar.png"))); // NOI18N
         jPanel2.add(Background);
@@ -193,10 +191,6 @@ public class FormDaftar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_NamaPengguna_TextFieldActionPerformed
 
-    private void KataSandi_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KataSandi_FieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KataSandi_FieldActionPerformed
-
     /** Method yang digunakan ketikan Label Daftar di klik oleh pengguna sehingga \
      *  pengguna dapat mendaftarkan id_pegawai, email, 
      *  serta sandi yang nantinya digunakan untuk login
@@ -260,6 +254,10 @@ public class FormDaftar extends javax.swing.JFrame {
         login.show();
         this.dispose();
     }//GEN-LAST:event_Masuk_LabelMouseClicked
+
+    private void KataSandi_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KataSandi_FieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KataSandi_FieldActionPerformed
 
     /**
      * @param args the command line arguments
