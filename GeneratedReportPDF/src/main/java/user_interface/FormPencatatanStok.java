@@ -5,6 +5,13 @@
  */
 package user_interface;
 
+import connect_to_database.KoneksiDatabase;
+import user_interface.MenuBeranda;
+import create_pdf.HasilReport;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author ASUS
@@ -29,19 +36,111 @@ public class FormPencatatanStok extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         Kembali_Label = new javax.swing.JLabel();
+        NamaBarang_Field = new javax.swing.JTextField();
+        StokAWAL_Field = new javax.swing.JTextField();
+        StokIN_Field = new javax.swing.JTextField();
+        StokOUT_Field = new javax.swing.JTextField();
+        StokSISA_Field = new javax.swing.JTextField();
+        StokGUDANG_Field = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        TabelSTOK = new javax.swing.JTable();
+        Create_Label = new javax.swing.JLabel();
+        Check_Label = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
+
+        Kembali_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Kembali_LabelMouseClicked(evt);
+            }
+        });
         jPanel1.add(Kembali_Label);
         Kembali_Label.setBounds(30, 610, 60, 50);
+
+        NamaBarang_Field.setText("Nama Barang");
+        NamaBarang_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NamaBarang_FieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(NamaBarang_Field);
+        NamaBarang_Field.setBounds(60, 180, 390, 50);
+
+        StokAWAL_Field.setText("Stok Awal");
+        jPanel1.add(StokAWAL_Field);
+        StokAWAL_Field.setBounds(60, 240, 390, 50);
+
+        StokIN_Field.setText("Stok IN");
+        jPanel1.add(StokIN_Field);
+        StokIN_Field.setBounds(60, 300, 390, 50);
+
+        StokOUT_Field.setText("Stok Out");
+        StokOUT_Field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StokOUT_FieldActionPerformed(evt);
+            }
+        });
+        jPanel1.add(StokOUT_Field);
+        StokOUT_Field.setBounds(60, 360, 390, 50);
+
+        StokSISA_Field.setText("StokSisa");
+        jPanel1.add(StokSISA_Field);
+        StokSISA_Field.setBounds(60, 430, 390, 50);
+
+        StokGUDANG_Field.setText("Stok Gudang");
+        jPanel1.add(StokGUDANG_Field);
+        StokGUDANG_Field.setBounds(60, 490, 390, 50);
+
+        TabelSTOK.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nama", "Stok Awal", "Stok IN", "Stok Out", "Stok Sisa", "Stok Gudang "
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(TabelSTOK);
+
+        jPanel1.add(jScrollPane1);
+        jScrollPane1.setBounds(480, 170, 590, 400);
+
+        Create_Label.setText("CREATE");
+        Create_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Create_LabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Create_Label);
+        Create_Label.setBounds(850, 610, 45, 16);
+
+        Check_Label.setText("CHECK");
+        Check_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Check_LabelMouseClicked(evt);
+            }
+        });
+        jPanel1.add(Check_Label);
+        Check_Label.setBounds(570, 610, 43, 16);
 
         Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Pencatatan Stok.png"))); // NOI18N
         Background.setText("jLabel1");
         jPanel1.add(Background);
-        Background.setBounds(10, 0, 1060, 670);
+        Background.setBounds(20, -10, 1060, 670);
 
         getContentPane().add(jPanel1);
         jPanel1.setBounds(-10, 0, 1070, 670);
@@ -49,6 +148,54 @@ public class FormPencatatanStok extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1079, 724));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Kembali_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Kembali_LabelMouseClicked
+        MenuBeranda beranda = new MenuBeranda(); 
+        beranda.show();
+        this.dispose();
+    }//GEN-LAST:event_Kembali_LabelMouseClicked
+
+    private void StokOUT_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StokOUT_FieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StokOUT_FieldActionPerformed
+
+    private void NamaBarang_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaBarang_FieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NamaBarang_FieldActionPerformed
+
+    private void Create_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Create_LabelMouseClicked
+        HasilReport LaporanStok = new HasilReport();
+        LaporanStok.generate_report();
+    }//GEN-LAST:event_Create_LabelMouseClicked
+
+    private void Check_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Check_LabelMouseClicked
+        // variabel untuk mengekseksusi query
+        PreparedStatement Statement;
+        // sebuah cursor untuk baris dari tabel tersebut
+        ResultSet HasilExecuteQuery; 
+        DefaultTableModel test = new DefaultTableModel();
+        
+        try { 
+            // query untuk mengecek password dan username sudah terdatftar
+            String query = "SELECT nama_barang, stok_awal, in_stok, out_stok, sisa_stok, stok_gudang FROM tb_barang";
+            Statement = KoneksiDatabase.getConnection().prepareStatement(query);
+            HasilExecuteQuery = Statement.executeQuery();
+            while(HasilExecuteQuery.next()) { 
+                String NamaBarang = String.valueOf(HasilExecuteQuery.getString("nama_barang"));
+                String StokAwal   = String.valueOf(HasilExecuteQuery.getString("stok_awal"));
+                String StokIn     = String.valueOf(HasilExecuteQuery.getString("in_stok"));
+                String StokOut    = String.valueOf(HasilExecuteQuery.getString("out_stok"));
+                String StokSisa   = String.valueOf(HasilExecuteQuery.getString("sisa_stok"));
+                String StokGudang  = String.valueOf(HasilExecuteQuery.getString("stok_gudang"));
+                
+                String data[] = {NamaBarang, StokAwal, StokIn, StokOut, StokSisa, StokGudang};
+                DefaultTableModel Tabel = (DefaultTableModel) TabelSTOK.getModel();
+                Tabel.addRow(data);
+            }
+        } catch(Exception e) {
+                System.err.print(e);
+        }
+    }//GEN-LAST:event_Check_LabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -87,7 +234,17 @@ public class FormPencatatanStok extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
+    private javax.swing.JLabel Check_Label;
+    private javax.swing.JLabel Create_Label;
     private javax.swing.JLabel Kembali_Label;
+    private javax.swing.JTextField NamaBarang_Field;
+    private javax.swing.JTextField StokAWAL_Field;
+    private javax.swing.JTextField StokGUDANG_Field;
+    private javax.swing.JTextField StokIN_Field;
+    private javax.swing.JTextField StokOUT_Field;
+    private javax.swing.JTextField StokSISA_Field;
+    private javax.swing.JTable TabelSTOK;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
