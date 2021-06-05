@@ -29,6 +29,10 @@ public class FormHome extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        PencatatanStok_Label = new javax.swing.JLabel();
+        Keluar_Label = new javax.swing.JLabel();
+        MendataBarang_Label = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -42,9 +46,53 @@ public class FormHome extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(0, 0, 0, 0);
 
-        setSize(new java.awt.Dimension(1070, 783));
+        PencatatanStok_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                PencatatanStok_LabelMouseClicked(evt);
+            }
+        });
+        getContentPane().add(PencatatanStok_Label);
+        PencatatanStok_Label.setBounds(690, 590, 60, 60);
+
+        Keluar_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Keluar_LabelMouseClicked(evt);
+            }
+        });
+        getContentPane().add(Keluar_Label);
+        Keluar_Label.setBounds(890, 590, 60, 50);
+
+        MendataBarang_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MendataBarang_LabelMouseClicked(evt);
+            }
+        });
+        getContentPane().add(MendataBarang_Label);
+        MendataBarang_Label.setBounds(490, 460, 140, 130);
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Beranda.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(10, 0, 1080, 710);
+
+        setSize(new java.awt.Dimension(1070, 718));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void Keluar_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Keluar_LabelMouseClicked
+        FormKeluar keluar = new FormKeluar();
+        keluar.show();
+        this.dispose();
+    }//GEN-LAST:event_Keluar_LabelMouseClicked
+
+    private void PencatatanStok_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PencatatanStok_LabelMouseClicked
+        
+    }//GEN-LAST:event_PencatatanStok_LabelMouseClicked
+
+    private void MendataBarang_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MendataBarang_LabelMouseClicked
+        FormMendataBarang data = new FormMendataBarang();
+        data.show();
+        this.dispose();
+    }//GEN-LAST:event_MendataBarang_LabelMouseClicked
 
     /**
      * @param args the command line arguments
@@ -82,7 +130,11 @@ public class FormHome extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Keluar_Label;
+    private javax.swing.JLabel MendataBarang_Label;
+    private javax.swing.JLabel PencatatanStok_Label;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
