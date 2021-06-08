@@ -2,89 +2,118 @@
  * Merupakan class yang digunakan untu
             
    melakukan generasi pada dokumen 
- * yang berbentuk pdf, Hasil tersebut terdapat bebarapa kolom tabel 
+ * yang berbentuk pdf, Hasil teHasilKembaliQueryebut terdapat bebarapa kolom tabel 
  * sehingga dapat digunakan untuk membuat laporan stok setelah penjualan
  *
  * Gede Rico Wijaya - 2005551091 PBO E
 */
 
+// HasilReport disimpan pada package create_pdf;
 package create_pdf;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.File;
-import java.time.*;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.pdf.PdfPCell;
-import com.itextpdf.text.pdf.PdfPTable;
-import com.itextpdf.text.pdf.PdfWriter;
+// package itextpdf
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.Document;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.element.Paragraph;
+
+// package connect_to_database
 import connect_to_database.*;
+
+// package JDK
+import java.io.FileNotFoundException;
+import java.io.OutputStream;
+import java.io.FileOutputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class HasilReport {
+    // method yang digunakan untuk membuat tabel pada tabel hasil report
+    // method ini mengambil satu parameter yaitu Object Document yang 
+    // dimana nantinya akan dinamakan dengan nama tabel
+    public static void membuat_tabel(Table table, Document document) { 
+        // memberikan judul pada tabel-tabel yang akan digunakan
+        table.addCell("Nama Barang");
+        table.addCell("Stok Awal");
+        table.addCell("Stok IN");
+        table.addCell("Stok OUT");
+        table.addCell("Stok Sisa");
+        table.addCell("Stok Gudang");
+    }
+
     public static void generate_report() {
         // String untuk file dari nama
         try {
             // String untuk nama dari file, bisa digunakan dengan directory tetapi
             // karena keterbatasan sistem maka hanya diperlukan nama dari Judul pdf saja
+            // Konfigurasi nama_file
             String nama_file = "HasilReport.pdf";
-            Document document = new Document();
-            PdfWriter.getInstance(document, new FileOutputStream(new File(nama_file)));
-            document.open();
+            OutputStream outputStream = new FileOutputStream(nama_file);
 
-            // menambahkan koneksi pada database
+            // dokumen dibuat pada kode dibawah ini 
+            PdfWriter writer = new PdfWriter(nama_file);
+            PdfDocument pdf = new PdfDocument(writer);
+            Document document = new Document(pdf);
+            
+            // menambahkan koneksi dari database
             KoneksiDatabase koneksi = new KoneksiDatabase();
             Connection database_koneksi = koneksi.getConnection();
-            PreparedStatement ps = null;
-            ResultSet rs = null;
+            PreparedStatement SQLStatement = null;
+            ResultSet HasilExecuteQuery = null;
 
             // Query yang digunakan untuk mengambil data dari database db_stok_barang
-            String query_Pengambilan_data = "SELECT nama_barang, stok_awal, in_stok, out_stok, sisa_stok, kode_kategori FROM tb_barang";
-            ps = database_koneksi.prepareStatement(query_Pengambilan_data);
-            rs = ps.executeQuery();
-            // Menambahkan paragraf yang berupa sebuah hasil rekap dari store dengan detail
-            // waktu pencatatan tersebut
-            String judul = new String("Hasil Rekap Store Tanggal" + LocalDateTime.now().toString());
-            document.addTitle(judul);
+            String query_Pengambilan_data = "SELECT nama_barang, stok_awal, in_stok, out_stok, sisa_stok, stok_gudang FROM tb_barang";            
+            SQLStatement = database_koneksi.prepareStatement(query_Pengambilan_data);
+            HasilExecuteQuery = SQLStatement.executeQuery();
+            
+            // Menambahkan Judul yang berupa sebuah hasil rekap dari store dengan detail
+            // waktu pencatatan Rekap Stok 
+            DateTimeFormatter Format =  DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss"); 
+            LocalDateTime now = LocalDateTime.now();
+            String JudulLaporan = new String("Hasil Rekap Store Tanggal" + " " + Format.format(now).toString());
+            Paragraph title = new Paragraph(JudulLaporan);
 
-            while(rs.next()) { 
+            document.add(title);      
+            
+            // membuat object table yang dibuat untuk dengan 6 Kolom yang diconfigurasikan dengan membuat 150F 
+            float [] pointColumnWidths = {150F, 150F, 150F, 150F, 150F, 150F,};
+            Table table = new Table(pointColumnWidths); 
 
+            // Invoke method membuat_table untuk membuat judul 
+            HasilReport.membuat_tabel(table, document);
+
+            while(HasilExecuteQuery.next()) { 
+                // Mengambil data-data yang ada pada database
+                String NamaBarang  = String.valueOf(HasilExecuteQuery.getString("nama_barang"));
+                String StokAwal    = String.valueOf(HasilExecuteQuery.getString("stok_awal"));
+                String StokIn      = String.valueOf(HasilExecuteQuery.getString("in_stok"));
+                String StokOut     = String.valueOf(HasilExecuteQuery.getString("out_stok"));
+                String StokSisa    = String.valueOf(HasilExecuteQuery.getString("sisa_stok"));
+                String StokGudang  = String.valueOf(HasilExecuteQuery.getString("stok_gudang"));
+                String data[]      = {NamaBarang, StokAwal, StokIn, StokOut, StokSisa, StokGudang};
+
+                // untuk mengetahui banyak data yang ada pada database 
+                int banyak_data = data.length;
+                // menambahkan data pada tabel sebagai control variabel 
+                for (int i = 0; i < banyak_data; i++) {
+                    table.addCell(data[i]); 
+                }  
             }
-    
-            // membuat tabel yang digunakan untuk menyimpan data
-            // tabel ini dibuat dengan 6 kolom yang menyimpan nama_barang, stok_awal,
-            // in_stok, out_stok, sisa_stok
-            PdfPTable tabel_penyimpanan_data = new PdfPTable(6);
-            PdfPCell kolom = new PdfPCell(new Phrase("Nama Barang"));
-            tabel_penyimpanan_data.addCell(kolom);
-
-            kolom = new PdfPCell(new Phrase("Stok Awal"));
-            tabel_penyimpanan_data.addCell(kolom);
-
-            kolom = new PdfPCell(new Phrase("Stok IN"));
-            tabel_penyimpanan_data.addCell(kolom);
-
-            kolom = new PdfPCell(new Phrase("Stok OUT"));
-            tabel_penyimpanan_data.addCell(kolom);
-
-            kolom = new PdfPCell(new Phrase("Stok Akhir"));
-            tabel_penyimpanan_data.addCell(kolom);
-
-            kolom = new PdfPCell(new Phrase("Kategori"));
-            tabel_penyimpanan_data.addCell(kolom);
-            document.add(kolom);
+      
+            document.add(table);
             document.close();
 
             // jika dokumen HasilReport.pdf sudah tercipta maka pada command line akan
             // terdapat pesan "Document Tercipta"
             System.out.print("Document Tercipta");
-        } catch (Exception e) {
-            System.err.println(e);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) { 
+            System.out.println(e);
         }
     }
 }
