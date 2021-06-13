@@ -21,6 +21,7 @@ public class FormLogin extends javax.swing.JFrame {
     // contructor akan memanggil method initComponents() 
     public FormLogin() {
         initComponents();
+        this.TutupSandi_Label.setVisible(false);
     }
 
     /**
@@ -31,10 +32,12 @@ public class FormLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        LihatSandi_Label = new javax.swing.JLabel();
+        TutupSandi_Label = new javax.swing.JLabel();
         Masuk_Label = new javax.swing.JLabel();
         Daftar_Label = new javax.swing.JLabel();
         LupaKataSandi_Label = new javax.swing.JLabel();
-        LihatPassword_Label = new javax.swing.JLabel();
         NamaPengguna_Field = new javax.swing.JTextField();
         KataSandi_Field = new javax.swing.JPasswordField();
         Background = new javax.swing.JLabel();
@@ -44,6 +47,31 @@ public class FormLogin extends javax.swing.JFrame {
 
         jPanel1.setLayout(null);
 
+        jPanel3.setBackground(new java.awt.Color(214, 236, 243));
+        jPanel3.setLayout(null);
+
+        LihatSandi_Label.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/ShowPassword.png")); // NOI18N
+        LihatSandi_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LihatSandi_LabelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LihatSandi_LabelMouseReleased(evt);
+            }
+        });
+        jPanel3.add(LihatSandi_Label);
+        LihatSandi_Label.setBounds(20, 10, 50, 50);
+
+        TutupSandi_Label.setBackground(new java.awt.Color(214, 236, 243));
+        TutupSandi_Label.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/HidePassword.png")); // NOI18N
+        TutupSandi_Label.setText("jLabel1");
+        jPanel3.add(TutupSandi_Label);
+        TutupSandi_Label.setBounds(20, 10, 50, 50);
+
+        jPanel1.add(jPanel3);
+        jPanel3.setBounds(970, 380, 80, 70);
+
+        Masuk_Label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Masuk_Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Masuk_LabelMouseClicked(evt);
@@ -52,6 +80,7 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel1.add(Masuk_Label);
         Masuk_Label.setBounds(720, 520, 170, 40);
 
+        Daftar_Label.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Daftar_Label.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Daftar_LabelMouseClicked(evt);
@@ -68,38 +97,19 @@ public class FormLogin extends javax.swing.JFrame {
         jPanel1.add(LupaKataSandi_Label);
         LupaKataSandi_Label.setBounds(810, 450, 180, 30);
 
-        LihatPassword_Label.setText("   ");
-        LihatPassword_Label.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                LihatPassword_LabelMouseClicked(evt);
-            }
-        });
-        jPanel1.add(LihatPassword_Label);
-        LihatPassword_Label.setBounds(920, 380, 50, 30);
-
         NamaPengguna_Field.setBackground(new java.awt.Color(214, 236, 243));
-        NamaPengguna_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        NamaPengguna_Field.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
         NamaPengguna_Field.setBorder(null);
-        NamaPengguna_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NamaPengguna_FieldActionPerformed(evt);
-            }
-        });
         jPanel1.add(NamaPengguna_Field);
-        NamaPengguna_Field.setBounds(590, 330, 380, 30);
+        NamaPengguna_Field.setBounds(590, 330, 380, 37);
 
         KataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
-        KataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        KataSandi_Field.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
         KataSandi_Field.setBorder(null);
-        KataSandi_Field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KataSandi_FieldActionPerformed(evt);
-            }
-        });
         jPanel1.add(KataSandi_Field);
-        KataSandi_Field.setBounds(590, 410, 380, 30);
+        KataSandi_Field.setBounds(590, 410, 380, 37);
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Form Login.png"))); // NOI18N
+        Background.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/Login.png")); // NOI18N
         Background.setText("jLabel1");
         jPanel1.add(Background);
         Background.setBounds(0, 0, 1060, 690);
@@ -111,10 +121,6 @@ public class FormLogin extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NamaPengguna_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPengguna_FieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NamaPengguna_FieldActionPerformed
-
     private void Daftar_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Daftar_LabelMouseClicked
         FormDaftar daftar = new FormDaftar();
         daftar.show();
@@ -122,11 +128,8 @@ public class FormLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_Daftar_LabelMouseClicked
 
     private void LupaKataSandi_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LupaKataSandi_LabelMouseClicked
-        FormLupaPassword lupa;
-        
-        lupa = new FormLupaPassword();
-        lupa.show();
-        this.dispose();
+        FormLupaPassword lupaPassword = new FormLupaPassword();
+        lupaPassword.show();
     }//GEN-LAST:event_LupaKataSandi_LabelMouseClicked
 
   
@@ -156,7 +159,7 @@ public class FormLogin extends javax.swing.JFrame {
                 rs = st.executeQuery();
                 // jika sudah terdaftar maka ResultSet akan berlanjut ke baris selanjutnya
                 if (rs.next()) {
-                    MenuBeranda beranda = new MenuBeranda();
+                    FormHome beranda = new FormHome();
                     beranda.show();
                     JOptionPane.showMessageDialog(null, "Berhasil Login");
                     this.dispose();
@@ -170,29 +173,29 @@ public class FormLogin extends javax.swing.JFrame {
  
     }//GEN-LAST:event_Masuk_LabelMouseClicked
 
-    private void LihatPassword_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LihatPassword_LabelMouseClicked
-        if(LihatPassword_Label.getText().equals("")) {
-            LihatPassword_Label.setText("");
-            KataSandi_Field.setEchoChar((char)0);
-        } else {
-            LihatPassword_Label.setText("");
-            KataSandi_Field.setEchoChar('*');
-        } 
-    }//GEN-LAST:event_LihatPassword_LabelMouseClicked
+    private void LihatSandi_LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LihatSandi_LabelMousePressed
+        TutupSandi_Label.setVisible(true);
+        LihatSandi_Label.setVisible(false);
+        KataSandi_Field.setEchoChar((char)0);
+    }//GEN-LAST:event_LihatSandi_LabelMousePressed
 
-    private void KataSandi_FieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KataSandi_FieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_KataSandi_FieldActionPerformed
+    private void LihatSandi_LabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LihatSandi_LabelMouseReleased
+        TutupSandi_Label.setVisible(false);
+        LihatSandi_Label.setVisible(true);
+        KataSandi_Field.setEchoChar('*');
+    }//GEN-LAST:event_LihatSandi_LabelMouseReleased
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Background;
     private javax.swing.JLabel Daftar_Label;
     private javax.swing.JPasswordField KataSandi_Field;
-    private javax.swing.JLabel LihatPassword_Label;
+    private javax.swing.JLabel LihatSandi_Label;
     private javax.swing.JLabel LupaKataSandi_Label;
     private javax.swing.JLabel Masuk_Label;
     private javax.swing.JTextField NamaPengguna_Field;
+    private javax.swing.JLabel TutupSandi_Label;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
     // End of variables declaration//GEN-END:variables
 }

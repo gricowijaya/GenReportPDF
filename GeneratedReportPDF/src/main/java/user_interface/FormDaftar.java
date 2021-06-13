@@ -45,6 +45,8 @@ public class FormDaftar extends javax.swing.JFrame {
         Daftar_Label = new javax.swing.JLabel();
         KataSandi_Field = new javax.swing.JPasswordField();
         KonfirmasiKataSandi_Field = new javax.swing.JPasswordField();
+        LihatSandi_Label = new javax.swing.JLabel();
+        TutupSandi_Label = new javax.swing.JLabel();
         Background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -54,18 +56,20 @@ public class FormDaftar extends javax.swing.JFrame {
         jPanel2.setLayout(null);
 
         Email_TextField.setBackground(new java.awt.Color(214, 236, 243));
-        Email_TextField.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        Email_TextField.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
+        Email_TextField.setText("Email");
         Email_TextField.setBorder(null);
-        Email_TextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Email_TextFieldActionPerformed(evt);
+        Email_TextField.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Email_TextFieldMouseClicked(evt);
             }
         });
         jPanel2.add(Email_TextField);
         Email_TextField.setBounds(720, 210, 330, 30);
 
         NamaPengguna_TextField.setBackground(new java.awt.Color(214, 236, 243));
-        NamaPengguna_TextField.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        NamaPengguna_TextField.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
+        NamaPengguna_TextField.setText("Username Anda");
         NamaPengguna_TextField.setBorder(null);
         NamaPengguna_TextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +99,8 @@ public class FormDaftar extends javax.swing.JFrame {
         Daftar_Label.setBounds(730, 490, 220, 50);
 
         KataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
-        KataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        KataSandi_Field.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
+        KataSandi_Field.setText("password");
         KataSandi_Field.setBorder(null);
         KataSandi_Field.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,12 +111,31 @@ public class FormDaftar extends javax.swing.JFrame {
         KataSandi_Field.setBounds(720, 350, 320, 20);
 
         KonfirmasiKataSandi_Field.setBackground(new java.awt.Color(214, 236, 243));
-        KonfirmasiKataSandi_Field.setFont(new java.awt.Font("Yu Gothic Medium", 0, 24)); // NOI18N
+        KonfirmasiKataSandi_Field.setFont(new java.awt.Font("Kohinoor Devanagari", 1, 24)); // NOI18N
+        KonfirmasiKataSandi_Field.setText("password");
         KonfirmasiKataSandi_Field.setBorder(null);
         jPanel2.add(KonfirmasiKataSandi_Field);
         KonfirmasiKataSandi_Field.setBounds(720, 410, 320, 20);
 
-        Background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Daftar.png"))); // NOI18N
+        LihatSandi_Label.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/ShowPassword.png")); // NOI18N
+        LihatSandi_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                LihatSandi_LabelMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                LihatSandi_LabelMouseReleased(evt);
+            }
+        });
+        jPanel2.add(LihatSandi_Label);
+        LihatSandi_Label.setBounds(1020, 490, 50, 50);
+
+        TutupSandi_Label.setBackground(new java.awt.Color(214, 236, 243));
+        TutupSandi_Label.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/HidePassword.png")); // NOI18N
+        TutupSandi_Label.setText("jLabel1");
+        jPanel2.add(TutupSandi_Label);
+        TutupSandi_Label.setBounds(1020, 490, 50, 50);
+
+        Background.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/Daftar.png")); // NOI18N
         jPanel2.add(Background);
         Background.setBounds(0, 5, 1098, 695);
 
@@ -182,10 +206,6 @@ public class FormDaftar extends javax.swing.JFrame {
         }
 
     }
-
-    private void Email_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Email_TextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_Email_TextFieldActionPerformed
 
     private void NamaPengguna_TextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NamaPengguna_TextFieldActionPerformed
         // TODO add your handling code here:
@@ -259,6 +279,27 @@ public class FormDaftar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_KataSandi_FieldActionPerformed
 
+    private void LihatSandi_LabelMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LihatSandi_LabelMousePressed
+        TutupSandi_Label.setVisible(true);
+        LihatSandi_Label.setVisible(false);
+        KataSandi_Field.setEchoChar((char)0);
+        KonfirmasiKataSandi_Field.setEchoChar((char)0);
+    }//GEN-LAST:event_LihatSandi_LabelMousePressed
+
+    private void LihatSandi_LabelMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LihatSandi_LabelMouseReleased
+        TutupSandi_Label.setVisible(false);
+        LihatSandi_Label.setVisible(true);
+        KataSandi_Field.setEchoChar('*');
+        KonfirmasiKataSandi_Field.setEchoChar('*');
+    }//GEN-LAST:event_LihatSandi_LabelMouseReleased
+
+    private void Email_TextFieldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Email_TextFieldMouseClicked
+        Email_TextField.setText("");
+        NamaPengguna_TextField.setText("");
+        KataSandi_Field.setText("");
+        KonfirmasiKataSandi_Field.setText("");
+    }//GEN-LAST:event_Email_TextFieldMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -301,8 +342,10 @@ public class FormDaftar extends javax.swing.JFrame {
     private javax.swing.JTextField Email_TextField;
     private javax.swing.JPasswordField KataSandi_Field;
     private javax.swing.JPasswordField KonfirmasiKataSandi_Field;
+    private javax.swing.JLabel LihatSandi_Label;
     private javax.swing.JLabel Masuk_Label;
     private javax.swing.JTextField NamaPengguna_TextField;
+    private javax.swing.JLabel TutupSandi_Label;
     private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 

@@ -1,9 +1,16 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+ * FormLupaPassword merupakan  
+ * */
 package user_interface;
+
+import connect_to_database.KoneksiDatabase;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 
 /**
  *
@@ -12,8 +19,8 @@ package user_interface;
 public class FormLupaPassword extends javax.swing.JFrame {
 
     /**
-     * Creates new form FormLupaPassword
-     */
+     * Memanggil Method initComponents yang merupakan penempatan dari GUI yang dimiliki     
+     * */
     public FormLupaPassword() {
         initComponents();
     }
@@ -34,10 +41,16 @@ public class FormLupaPassword extends javax.swing.JFrame {
         KonfirmasiKataSandi_Field = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
         jPanel1.setLayout(null);
+
+        Pulihkan_Label.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                Pulihkan_LabelMouseClicked(evt);
+            }
+        });
         jPanel1.add(Pulihkan_Label);
         Pulihkan_Label.setBounds(500, 620, 170, 60);
 
@@ -56,7 +69,7 @@ public class FormLupaPassword extends javax.swing.JFrame {
         jPanel1.add(KonfirmasiKataSandi_Field);
         KonfirmasiKataSandi_Field.setBounds(410, 550, 440, 50);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/user_interface/Lupa Password.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("/Users/macos/NetBeansProjects/GeneratedReportPDF/icon/LupaPassword.png")); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(0, 0, 1110, 690);
 
@@ -67,7 +80,114 @@ public class FormLupaPassword extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /** Method Pulihkan_LabelMouseClicked merupakan method yang digunakan 
+     *  untuk melakukan sebuah pembaharuan password sehingga password 
+     *  yang lupa akan dipulihkan*/
+    private void Pulihkan_LabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pulihkan_LabelMouseClicked
+        // String yang digunakan untuk menyimpan semua apa yang diketikkan oleh pengguna 
+        String email_pegawai         = Email_Field.getText(); 
+        // Label untuk sandi perlu diperbaharui - 14 : 32 02 - Jun 2021
+        // karena ketika pengguna mengetik tanda bintang tidak terbaca
+        String kata_sandi_baru       = KataSandi_Field.getText();
+        String konfirmasi_kata_sandi = KonfirmasiKataSandi_Field.getText();
+
+        // pengecekan texfield
+        if (cekTextField()) {
+            // cek username ada atau tidak
+            if (CekEmail(email_pegawai)) {
+                PreparedStatement ps;
+                ResultSet rs;
+                // menyimpan query yang digunakan pada SQL
+                String queryRegistrasi = "UPDATE tb_pegawai SET password = ? WHERE email = ?";
+                try {
+                    // mencoba eksekusi query
+                    ps = KoneksiDatabase.getConnection().prepareStatement(queryRegistrasi);
+                    // pengganti Value harus sesuai order pada tabel yang digunakan untuk query
+                    ps.setString(1, kata_sandi_baru);
+                    ps.setString(2, email_pegawai);
+                    // mengecek akun tersebut didaftarkan oleh system atau tidak
+                    try {
+                        if (ps.executeUpdate() != 0) {
+                            JOptionPane.showMessageDialog(null, "Password Diperbaharui");
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Error, Silahkan cek data anda");
+                        }
+                        // jika tidak akan mendapatkan error dari dialog dan exeception handler
+                    } catch (Exception ex) {
+                        System.out.println(ex);
+                    }
+                    // jika query tidak terjalankan akan diberikan SQLExeption pada terminal
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_Pulihkan_LabelMouseClicked
+    
+    // method yang digunakan untuk melakukan pengecekan email apakah email tersebut terdaftar pada database atau tidak. 
+    public boolean CekEmail(String email) {
+        PreparedStatement st;
+        ResultSet rs;
+
+        boolean email_terdaftar = false;
+
+        // query yang akan dijalankan pada database
+        String query = "SELECT * FROM tb_pegawai WHERE email = ?";
+
+        // pengecekan email 
+        try {
+            st = KoneksiDatabase.getConnection().prepareStatement(query);
+            st.setString(1, email);
+            rs = st.executeQuery();
+            
+            // jika email terdaftar maka akan kembali kepada FormLogin 
+            if (rs.next()) {
+                email_terdaftar = true;
+                FormLogin login = new FormLogin();
+                login.setVisible(true);
+                login.pack();
+                login.setSize(1153, 695);
+                login.setLocationRelativeTo(null);
+                // dispose Form Lupa Password
+                this.dispose();
+            } else { 
+                // jika email tidak terdaftar maka akan diberikan peringatan
+                JOptionPane.showMessageDialog(null, "Email Terdaftar", "Gagal Memulihkan", 2);
+            }
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }
+        return email_terdaftar;
+    }
+    
+    /** Method yang digunakan untuk mengecek Text Field yang digunakan untuk mendaftarkan
+     *  2005551091 - Gede Rico Wijaya 
+     *  masih terdapat beberapa field yang harus diubah 14:37 02 - Jun - 2021*/
+    public boolean cekTextField() {
+        // String yang digunakan untuk menyimpan semua apa yang diketikkan oleh pengguna 
+        String email_pegawai         = Email_Field.getText(); 
+        // Label untuk sandi perlu diperbaharui - 14 : 32 02 - Jun 2021
+        // karena ketika pengguna mengetik tanda bintang tidak terbaca
+        String kata_sandi_baru       = KataSandi_Field.getText();
+        String konfirmasi_kata_sandi = KonfirmasiKataSandi_Field.getText();
+
+        // mengecek field yang kosong
+        if (email_pegawai.trim().equals("") || kata_sandi_baru.trim().equals("")
+                || konfirmasi_kata_sandi.trim().equals("")) {
+            JOptionPane.showMessageDialog(null, "Salah Satu Kotak Tidak Diisi Data", "Kotak Kosong", 2);
+            return false;
+            // mengecek kesamaan kedua password
+        } else if (!kata_sandi_baru.equals(konfirmasi_kata_sandi)) {
+            JOptionPane.showMessageDialog(null, "Password Tidak Sama, Silahkan Cek Ulang", "Password Sama", 2);
+            return false;
+            // Jika kondisi dari registrasi sudah benar
+        } else {
+            return true;
+        }
+    }
+
     /**
+     * Test Driver
      * @param args the command line arguments
      */
     public static void main(String args[]) {
